@@ -7,6 +7,10 @@ use App\Models\Brand;
 use App\Models\Family;
 use App\Models\File;
 use App\Models\Group;
+use App\Models\Set;
+use App\Models\Des;
+use App\Models\Calibration;
+use App\Models\Location;
 use App\Models\Log;
 use App\Models\Tool;
 use Illuminate\Support\Facades\DB;
@@ -26,15 +30,13 @@ class ToolController extends Controller
                 return [
                     'id' => $tool->id,
                     'item' => $tool->item,
-                    'description' => $tool->description,
-                    'measurement' => $tool->measurement,
-                    'group' => $tool->group,
-                    'family' => $tool->family,
+                    'set' => $tool->set,
+                    'des' => $tool->des,
                     'brand' => $tool->brand,
-                    'model' => $tool->model,
+                    'calibration' => $tool-calibration,
+                    'location' => $tool->location,
                     'serial_number' => $tool->serial_number,
-                    'calibration_expiration' => $tool->calibration_expiration,
-                    'has_validation' => $tool->has_validation
+                    'calibration_expiration' => $tool->calibration_expiration
                 ];
             })
         );
@@ -44,22 +46,17 @@ class ToolController extends Controller
         return response()->json([
             'id' => $tool->id,
             'item' => $tool->item,
-            'description' => $tool->description,
-            'measurement' => $tool->measurement,
-            'group' => $tool->group,
-            'family' => $tool->family,
+            'set' => $tool->set,
+            'des' => $tool->des,
             'brand' => $tool->brand,
-            'model' => $tool->model,
-            'serial_number' => $tool->serial_number,
-            'calibration_expiration' => $tool->calibration_expiration,
-            'has_validation' => $tool->has_validation,
-            'main_localization' => $tool->main_localization,
-            'shelf_localization' => $tool->shelf_localization,
-            'shelf' => $tool->shelf,
-            'user' => $tool->user,
-            'min_stock' => $tool->min_stock,
+            'calibration' => $tool-calibration,
+            'location' => $tool->location,
             'quantity' => $tool->quantity,
-            'dispatchable' => $tool->dispatchable,
+            'measurement' => $tool->measurement,
+            'serial_number' => $tool->serial_number,
+            'spect' => $tool->spect,
+            'model' => $tool->model,
+            'shelf_localization' => $tool->shelf_localization,
             'comments' => $tool->comments,
             'files' => $tool->files->map(static function(File $file) {
                 return $file->path;
@@ -113,11 +110,13 @@ class ToolController extends Controller
     public function update(Request $request, Tool $tool) {
         DB::beginTransaction();
         try {
-            $group = $this->getGroup($request->group);
-            $family = $this->getFamily($request->family);
+            $set = $this->getSet($request->set);
+            $des = $this->getDes($request->des);
+            $calibration = $this->getCalibration($request->calibration);
+            $location = $this->getLocation($request->location);
             $brand = $this->getBrand($request->brand);
             $oldTool = json_encode($this->getValues($tool->toArray(), $tool));
-            if ($request->main_localization !== $tool->main_localization) {
+            if ($request->location !== $tool->location) {
                 $tool->update([ 'quantity' => $tool->quantity - $request->movingQuantity ]);
                 $request->quantity = $request->movingQuantity;
                 $tool = $this->createTool($request);
@@ -130,23 +129,18 @@ class ToolController extends Controller
                 ]);
             } else {
                 $tool->update([
-                    'description' => $request->description,
-                    'group_id' => $group->id ?? null,
-                    'family_id' => $family->id ?? null,
+                    'set_id' => $set->id ?? null,
+                    'des_id' => $des->id ?? null,
                     'brand_id' => $brand->id ?? null,
-                    'model' => $request->model,
-                    'serial_number' => $request->serial,
-                    'size' => $request->size,
-                    'calibration_expiration' => $request->has_validation ? $request->calibration_expiration : null,
-                    'has_validation' => $request->has_validation,
-                    'main_localization' => $request->main_localization,
-                    'shelf_localization' => $request->shelf_localization,
-                    'shelf' => $request->shelf,
-                    'measurement' => $request->measurement,
-                    'min_stock' => $request->min_stock,
+                    'calibration_id' => $calibration->id ?? null,
+                    'location_id' => $location->id ?? null,
                     'quantity' => $request->quantity,
-                    'comments' => $request->comments,
-                    'dispatchable' => $request->dispatchable
+                    'measurement' => $request->measurement,
+                    'serial_number' => $request->serial,
+                    'spect' => $request->spect,
+                    'model' => $tool->model,
+                    'shelf_localization' => $request->shelf_localization,
+                    'comments' => $request->comments
                 ]);
                 $oldValues = $tool->getChanges();
                 if (count($oldValues) > 0) {
@@ -170,27 +164,24 @@ class ToolController extends Controller
     }
 
     private function createTool(Request $request) {
-        $group = $this->getGroup($request->group);
-        $family = $this->getFamily($request->family);
+        $set = $this->getSet($request->set);
+        $des = $this->getDes($request->des);
         $brand = $this->getBrand($request->brand);
+        $calibration = $this->getCalibration($request->calibration);
+        $location = $this->getLocation($request->location);
         $tool = $request->user()->tools()->create([
-            'description' => $request->description,
-            'group_id' => $group->id ?? null,
-            'family_id' => $family->id ?? null,
+            'set_id' => $set->id ?? null,
+            'des_id' => $des->id ?? null,
             'brand_id' => $brand->id ?? null,
-            'model' => $request->model,
-            'serial_number' => $request->serial,
-            'size' => $request->size,
-            'calibration_expiration' => $request->has_validation ? $request->calibration_expiration : null,
-            'has_validation' => $request->has_validation,
-            'main_localization' => $request->main_localization,
-            'shelf_localization' => $request->shelf_localization,
-            'shelf' => $request->shelf,
-            'measurement' => $request->measurement,
-            'min_stock' => $request->min_stock,
+            'calibration_id' => $calibration->id ?? null,
+            'location_id' => $location->id ?? null,
             'quantity' => $request->quantity,
-            'comments' => $request->comments,
-            'dispatchable' => $request->dispatchable
+            'measurement' => $request->measurement,
+            'serial_number' => $request->serial,
+            'spect' => $request->spect,
+            'model' => $tool->model,
+           'shelf_localization' => $request->shelf_localization,
+            'comments' => $request->comments
         ]);
         $tool->update([
             'item' => sprintf('AAA%04d', $tool->id)
@@ -200,11 +191,10 @@ class ToolController extends Controller
 
     private function getValues($values, Tool $tool) {
 //        dd($values, $tool);
-        $specialAttributes = ['group_id' => 'group','family_id' => 'family','brand_id' => 'brand'];
-        $names = ['item' => 'Item','description' => 'Descripcion','group_id' => 'Sub Grupo','family_id' => 'Familia','brand_id' => 'Marca',
-            'model' => 'Modelo','serial_number' => 'Numero de serie','calibration_expiration' => 'Expiracion de calibracion','dispatchable' => 'Despachable',
-            'has_validation' => 'Sujeto a validacion', 'main_localization' => 'Localizacion principal', 'shelf_localization' => 'Localizacion de estante', 'shelf' => 'Estante',
-            'measurement' => 'Medida', 'min_stock' => 'Stock minimo', 'quantity' => 'Cantidad', 'comments' => 'Comentarios'];
+        $specialAttributes = ['set_id' => 'set','des_id' => 'des','brand_id' => 'brand','calibration_id' => 'calibration','location_id' => 'location'];
+        $names = ['item' => 'Item','set_id' => 'Equipo','des_id' => 'Descripcion','brand_id' => 'Marca','calibration_id' => 'Calibracion', 'location_id'=> 'Localizacion',
+            'quantity' => 'Cantidad/QTY','measurement' => 'Unidad de contaje','serial_number' => 'N de serie','spect' => 'Caracteristicas',
+            'model' => 'Modelo/Model', 'shelf_localization' => 'Localizacion 2', 'comments' => 'Comentarios'];
         $data = array();
         foreach (array_keys($values) as $key) {
             if (array_key_exists($key, $specialAttributes)) {
@@ -220,26 +210,23 @@ class ToolController extends Controller
         return [
             'id' => $tool->id,
             'item' => $tool->item,
-            'description' => $tool->description,
-            'measurement' => $tool->measurement,
-            'group' => $tool->group,
-            'family' => $tool->family,
+            'set' => $tool->set,
+            'des' => $tool->des,
             'brand' => $tool->brand,
-            'model' => $tool->model,
+            'calibration' => $tool-calibration,
+            'location' => $tool->location,
+            'quantity' => $tool->quantity,
+            'measurement' => $tool->measurement,
             'serial_number' => $tool->serial_number,
-            'calibration_expiration' => $tool->calibration_expiration,
-            'has_validation' => $tool->has_validation,
-            'main_localization' => $tool->main_localization,
+            'spect' => $tool->spect,
+            'model' => $tool->model,
             'shelf_localization' => $tool->shelf_localization,
-            'shelf' => $tool->shelf,
-            'user' => $tool->user,
-            'min_stock' => $tool->min_stock,
-            'quantity' => $tool->quantity
+            'user' => $tool->user
         ];
     }
 
     public function search(Request $request) {
-        $especialKeys = ['group','brand','family','user'];
+        $especialKeys = ['set','des','brand','calibration','location','user'];
         $filters = $request->keys();
         $query = Tool::query();
         foreach($filters as $filter) {
@@ -259,28 +246,28 @@ class ToolController extends Controller
         return response()->json($data);
     }
 
-    private function getGroup($data)
+    private function getSet($data)
     {
         if (is_null($data)) {
             return null;
         }
         if (is_array($data)) {
-            return Group::find($data['id']);
+            return Set::find($data['id']);
         }
-        return Group::where('name', $data)->firstOrCreate([
+        return Set::where('name', $data)->firstOrCreate([
             'name' => $data
         ]);
     }
 
-    private function getFamily($data)
+    private function getDes($data)
     {
         if (is_null($data)) {
             return null;
         }
         if (is_array($data)) {
-            return Family::find($data['id']);
+            return Des::find($data['id']);
         }
-        return Family::where('name', $data)->firstOrCreate([
+        return Des::where('name', $data)->firstOrCreate([
             'name' => $data
         ]);
     }
@@ -294,6 +281,32 @@ class ToolController extends Controller
             return Brand::find($data['id']);
         }
         return Brand::where('name', $data)->firstOrCreate([
+            'name' => $data
+        ]);
+    }
+
+    private function getCalibration($data)
+    {
+        if (is_null($data)) {
+            return null;
+        }
+        if (is_array($data)) {
+            return Calibration::find($data['id']);
+        }
+        return Calibration::where('name', $data)->firstOrCreate([
+            'name' => $data
+        ]);
+    }
+
+    private function getLocation($data)
+    {
+        if (is_null($data)) {
+            return null;
+        }
+        if (is_array($data)) {
+            return Location::find($data['id']);
+        }
+        return Location::where('name', $data)->firstOrCreate([
             'name' => $data
         ]);
     }

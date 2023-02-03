@@ -19,16 +19,24 @@ class Tool extends Model
         'dispatchable' => 'boolean'
     ];
 
+    public function set(): BelongsTo {
+        return $this->belongsTo(Set::class);
+    }
+
+    public function des(): BelongsTo {
+        return $this->belongsTo(Des::class);
+    }
+
     public function brand(): BelongsTo {
         return $this->belongsTo(Brand::class);
     }
 
-    public function family(): BelongsTo {
-        return $this->belongsTo(Family::class);
+    public function calibration(): BelongsTo {
+        return $this->belongsTo(Calibration::class);
     }
 
-    public function group(): BelongsTo {
-        return $this->belongsTo(Group::class);
+    public function location(): BelongsTo {
+        return $this->belongsTo(Location::class);
     }
 
     public function files(): MorphMany {
