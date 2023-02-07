@@ -14,13 +14,13 @@ class CreateProductsTable extends Migration
     public function up()
     {
 
-        Schema::create('groups', static function(Blueprint $table) {
+        Schema::create('sets', static function(Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
         });
 
-        Schema::create('families', static function(Blueprint $table) {
+        Schema::create('dess', static function(Blueprint $table) {
            $table->id();
            $table->string('name');
            $table->timestamps();
@@ -32,25 +32,33 @@ class CreateProductsTable extends Migration
            $table->timestamps();
         });
 
+        Schema::create('calibrations', static function(Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+         });
+
+         Schema::create('locations', static function(Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+         });
+
+
         Schema::create('tools', function (Blueprint $table) {
             $table->id();
             $table->string('item')->nullable();
-            $table->string('description');
-            $table->foreignId('group_id')->nullable()->constrained();
-            $table->foreignId('family_id')->constrained();
+            $table->string('set_id')->nullable()->constrained();;
+            $table->foreignId('des_id')->constrained();
             $table->foreignId('brand_id')->constrained();
-            $table->string('model')->nullable();
-            $table->string('serial_number')->unique()->nullable();
-            $table->date('calibration_expiration')->nullable();
-            $table->boolean('dispatchable')->default(false);
-            $table->boolean('has_validation')->comment('sujeto a validacion')->nullable();
-            $table->string('main_localization');
-            $table->string('shelf_localization')->nullable();
-            $table->string('shelf')->nullable();
-            $table->string('measurement');
-            $table->foreignId('user_id')->constrained();
-            $table->decimal('min_stock')->nullable();
+            $table->foreignId('calibration_id')->constrained();
+            $table->foreignId('location_id')->constrained();
             $table->decimal('quantity');
+            $table->string('measurement');
+            $table->string('serial_number')->unique()->nullable();
+            $table->string('spect');
+            $table->string('model')->nullable();
+            $table->string('shelf_localization')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -64,8 +72,10 @@ class CreateProductsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tools');
-        Schema::dropIfExists('groups');
-        Schema::dropIfExists('families');
+        Schema::dropIfExists('sets');
+        Schema::dropIfExists('dess');
+        Schema::dropIfExists('calibrations');
+        Schema::dropIfExists('locations');
         Schema::dropIfExists('brands');
     }
 }

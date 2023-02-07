@@ -42,10 +42,10 @@ export default {
         loading: false,
         search: null,
         headers: [],
-        specialKeys: ['group','family','brand'],
+        specialKeys: ['set','des','brand','calibration','location'],
         historyHeaders: [
             {text: 'Item', value: 'tool.item'},
-            {text: 'Familia', value: 'family.name'},
+            {text: 'Equipo', value: 'set.name'},
             {text: 'Fecha', value: 'created_at'},
             {text: 'Ejecutor', value: 'user.email'},
             {text: 'Actividad', value: 'comment'},
