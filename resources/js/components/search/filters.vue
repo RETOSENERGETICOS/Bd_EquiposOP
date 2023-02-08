@@ -1,17 +1,17 @@
 <template>
     <v-expansion-panels v-model="panel">
         <v-expansion-panel>
-            <v-expansion-panel-header>Filtros</v-expansion-panel-header>
+            <v-expansion-panel-header>Filtros/Filters</v-expansion-panel-header>
             <v-expansion-panel-content>
                 <v-row>
                     <v-col>
                         <active-filters />
                     </v-col>
                     <v-col>
-                        <v-btn color="success" text @click.prevent="search">Aplicar filtros <v-icon>mdi-download</v-icon></v-btn>
+                        <v-btn color="success" text @click.prevent="search">Aplicar filtros/Apply field  <v-icon>mdi-download</v-icon></v-btn>
                     </v-col>
                     <v-col>
-                        <v-btn color="cyan" text @click.prevent="history">Consultar Historial <v-icon>mdi-history</v-icon></v-btn>
+                        <v-btn color="cyan" text @click.prevent="history">Consultar Historial/History <v-icon>mdi-history</v-icon></v-btn>
                     </v-col>
                 </v-row>
                 <v-row>

@@ -6,14 +6,14 @@
                 <v-card-title>Desea eliminar los registros seleccionados?</v-card-title>
                 <v-card-actions>
                     <v-btn color="success" @click.prevent="deleteTools">Eliminar</v-btn>
-                    <v-btn color="error">Cancelar</v-btn>
+                    <v-btn color="error">Cancelar/Cancel</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
         <v-data-table :headers="headers" :items="items" show-select v-model="selected" :loading="loading">
             <template v-slot:top>
                 <v-toolbar flat>
-                    <v-toolbar-title>Herramientas</v-toolbar-title>
+                    <v-toolbar-title>Equipos Op</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
                     <v-text-field v-model="search" label="Buscar/Search" hide-details></v-text-field>
