@@ -5,7 +5,7 @@
         <v-data-table :headers="headers" :items="users" :loading="loading" @click:row="viewUser">
             <template v-slot:top>
                 <v-toolbar flat>
-                    <v-toolbar-title>Usuarios</v-toolbar-title>
+                    <v-toolbar-title>Usuarios/User</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
                     <create @userCreated="userCreated"/>
@@ -30,9 +30,9 @@ export default {
         loading: true,
         roles: [],
         headers: [
-            { text: 'Usuario', value: 'email' },
-            { text: 'Tipo', value: 'role' },
-            { text: 'Fecha de registro', value: 'created_at' }
+            { text: 'Correo/Email', value: 'email' },
+            { text: 'Tipo/Type', value: 'role' },
+            { text: 'Fecha de registro/Recorded date', value: 'created_at' }
         ],
         snackbar: {
             active: false,

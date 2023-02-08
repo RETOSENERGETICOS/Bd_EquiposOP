@@ -15,7 +15,7 @@
                         <v-icon>mdi-account-multiple</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Usuarios</v-list-item-title>
+                        <v-list-item-title>Usuarios/User</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider v-if="verifyAccess([1])"></v-divider>
