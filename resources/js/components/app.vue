@@ -15,7 +15,7 @@
                         <v-icon>mdi-account-multiple</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Usuarios/User</v-list-item-title>
+                        <v-list-item-title>Usuarios/Users</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider v-if="verifyAccess([1])"></v-divider>
@@ -32,7 +32,7 @@
                 <v-list-item @click.prevent="closeSession" link>
                     <v-list-item-icon><v-icon>mdi-exit-to-app</v-icon></v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Cerrar Sesion</v-list-item-title>
+                        <v-list-item-title>Cerrar Sesion/Log out</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
@@ -53,10 +53,10 @@ export default {
     name: "app",
     data: () => ({
         menus: [
-            { name: 'Agregar', icon: 'mdi-plus', routeName: 'tools.create', requiredRoles: [1,2] },
-            { name: 'Eliminar', icon: 'mdi-minus', routeName: 'tools.destroy', requiredRoles: [1,2] },
-            { name: 'Editar', icon: 'mdi-pencil', routeName: 'tools.edit', requiredRoles: [1,2] },
-            { name: 'Consultar', icon: 'mdi-magnify', routeName: 'search.index', requiredRoles: [] },
+            { name: 'Agregar/Add', icon: 'mdi-plus', routeName: 'tools.create', requiredRoles: [1,2] },
+            { name: 'Eliminar/Delete', icon: 'mdi-minus', routeName: 'tools.destroy', requiredRoles: [1,2] },
+            { name: 'Editar/Edit', icon: 'mdi-pencil', routeName: 'tools.edit', requiredRoles: [1,2] },
+            { name: 'Consultar/Look for', icon: 'mdi-magnify', routeName: 'search.index', requiredRoles: [] },
             // { name: 'Historial', icon: 'mdi-history', routeName: 'tools.history', requiredRoles: [1,2] }
         ]
     }),

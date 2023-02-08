@@ -4,7 +4,7 @@
             <v-card>
                 <v-card-title>Eliminar usuario?</v-card-title>
                 <v-card-actions>
-                    <v-btn @click="deleteUser" color="success" text>Eliminar <v-icon>mdi-check</v-icon></v-btn>
+                    <v-btn @click="deleteUser" color="success" text>Eliminar/Delete <v-icon>mdi-check</v-icon></v-btn>
                     <v-btn @click="confirm = false" color="error" text>Cancelar/Cancel <v-icon>mdi-cancel</v-icon></v-btn>
                 </v-card-actions>
             </v-card>

@@ -28,7 +28,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-btn color="success" :disabled="!valid" @click.prevent="register" text>Registrar/To register</v-btn>
-                <v-btn color="error" @click="active = false" text>Cancelar</v-btn>
+                <v-btn color="error" @click="active = false" text>Cancelar/Cancel</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
