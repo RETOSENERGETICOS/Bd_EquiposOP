@@ -9,7 +9,7 @@
             </v-list-item>
             <v-divider></v-divider>
             <v-list dense nav>
-                <v-list-item-subtitle v-if="verifyAccess([1])">Administracion</v-list-item-subtitle>
+                <v-list-item-subtitle v-if="verifyAccess([1])">Administracion/Administration</v-list-item-subtitle>
                 <v-list-item link @click.prevent="goToRoute('users.index')" v-if="verifyAccess([1])">
                     <v-list-item-icon>
                         <v-icon>mdi-account-multiple</v-icon>
@@ -19,7 +19,7 @@
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider v-if="verifyAccess([1])"></v-divider>
-                <v-list-item-subtitle>Base de datos</v-list-item-subtitle>
+                <v-list-item-subtitle>Base de datos/Data Base</v-list-item-subtitle>
                 <v-list-item v-for="(menu, i) in menus" :key="i" link @click="goToRoute(menu.routeName)" v-if="verifyAccess(menu.requiredRoles)">
                     <v-list-item-icon>
                         <v-icon>{{ menu.icon }}</v-icon>
