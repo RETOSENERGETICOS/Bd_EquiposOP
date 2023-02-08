@@ -17,19 +17,19 @@
                     <v-form v-model="valid">
                         <v-row>
                             <v-col cols="4">
-                                <v-combobox label="Equipo" v-model="tool.set" item-text="name" :items="sets" clearable item-value="name"></v-combobox>
+                                <v-combobox label="Equipo/Set" v-model="tool.set" item-text="name" :items="sets" clearable item-value="name"></v-combobox>
                             </v-col>
                             <v-col cols="4">
-                                <v-combobox label="Descripcion" v-model="tool.des" item-text="name" :items="dess" clearable item-value="name"></v-combobox>
+                                <v-combobox label="Descripcion/Description" v-model="tool.des" item-text="name" :items="dess" clearable item-value="name"></v-combobox>
                             </v-col>
                             <v-col cols="4">
-                                <v-combobox label="Marca" v-model="tool.brand" item-text="name" :items="brands" :rules="[rules.required]" clearable item-value="name" disabled></v-combobox>
+                                <v-combobox label="Marca/Brand" v-model="tool.brand" item-text="name" :items="brands" :rules="[rules.required]" clearable item-value="name" disabled></v-combobox>
                             </v-col>
                             <v-col cols="4">
-                                <v-combobox label="Calibracion" v-model="tool.calibration" item-text="name" :items="calibrations" :rules="[rules.required]" clearable item-value="name" disabled></v-combobox>
+                                <v-combobox label="Calibracion/Calibration Due" v-model="tool.calibration" item-text="name" :items="calibrations" :rules="[rules.required]" clearable item-value="name" disabled></v-combobox>
                             </v-col>
                             <v-col cols="4">
-                                <v-combobox label="Localizacion" v-model="tool.location" item-text="name" :items="locations" :rules="[rules.required]" clearable item-value="name" disabled></v-combobox>
+                                <v-combobox label="Localizacion/Location" v-model="tool.location" item-text="name" :items="locations" :rules="[rules.required]" clearable item-value="name" disabled></v-combobox>
                             </v-col>
                         </v-row>
                         <v-row>

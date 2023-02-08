@@ -15,11 +15,11 @@
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col cols="4" v-if="filters.set.active"><v-select v-model="filter.set" label="Equipo" :items="sets" item-text="name" return-object clearable></v-select></v-col>
+                    <v-col cols="4" v-if="filters.set.active"><v-select v-model="filter.set" label="Equipo/Set" :items="sets" item-text="name" return-object clearable></v-select></v-col>
                     <v-col cols="4" v-if="filters.des.active"><v-select v-model="filter.des" label="Descripcion/Description" :items="dess" item-text="name" return-object clearable></v-select></v-col>
                     <v-col cols="4" v-if="filters.brand.active"><v-select v-model="filter.brand" label="Marca/Brand" :items="brands" item-text="name" return-object clearable></v-select></v-col>
-                    <v-col cols="4" v-if="filters.calibration.active"><v-select v-model="filter.calibration" label="Calibracion" :items="calibrations" item-text="name" return-object clearable></v-select></v-col>
-                    <v-col cols="4" v-if="filters.location.active"><v-select v-model="filter.location" label="Localizacion" :items="locations" item-text="name" return-object clearable></v-select></v-col>
+                    <v-col cols="4" v-if="filters.calibration.active"><v-select v-model="filter.calibration" label="Calibracion/Calibration Due" :items="calibrations" item-text="name" return-object clearable></v-select></v-col>
+                    <v-col cols="4" v-if="filters.location.active"><v-select v-model="filter.location" label="Localizacion/Location" :items="locations" item-text="name" return-object clearable></v-select></v-col>
 
                     <v-col cols="4" v-if="filters.quantity.active"><v-text-field v-model.number="filter.quantity" label="Cantidad" clearable></v-text-field></v-col>
                     <v-col cols="4" v-if="filters.measurement.active"><v-text-field v-model="filter.measurement" label="Medida" clearable></v-text-field></v-col>

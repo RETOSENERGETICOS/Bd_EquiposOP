@@ -192,9 +192,9 @@ class ToolController extends Controller
     private function getValues($values, Tool $tool) {
 //        dd($values, $tool);
         $specialAttributes = ['set_id' => 'set','des_id' => 'des','brand_id' => 'brand','calibration_id' => 'calibration','location_id' => 'location'];
-        $names = ['item' => 'Item','set_id' => 'Equipo','des_id' => 'Descripcion','brand_id' => 'Marca','calibration_id' => 'Calibracion', 'location_id'=> 'Localizacion',
-            'quantity' => 'Cantidad/QTY','measurement' => 'Unidad de contaje','serial_number' => 'N de serie','spect' => 'Caracteristicas',
-            'model' => 'Modelo/Model', 'shelf_localization' => 'Localizacion 2', 'comments' => 'Comentarios'];
+        $names = ['item' => 'Item','set_id' => 'Equipo/Set','des_id' => 'Descripcion/Description','brand_id' => 'Marca/Brand','calibration_id' => 'Calibracion/Calibration Due', 'location_id'=> 'Localizacion/Location',
+            'quantity' => 'Cantidad/Quantity','measurement' => 'Unidad de contaje/Unit','serial_number' => 'N de serie/Serial #','spect' => 'Caracteristicas/Spect',
+            'model' => 'Modelo/Model', 'shelf_localization' => 'Localizacion 2/Location 2', 'comments' => 'Comentarios/Comments'];
         $data = array();
         foreach (array_keys($values) as $key) {
             if (array_key_exists($key, $specialAttributes)) {

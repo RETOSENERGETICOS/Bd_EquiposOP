@@ -15,49 +15,49 @@
             <div class="form-container">
                 <div class="form-column">
                    <div class="form-row">
-                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.set" label="Equipo" :items="sets" item-text="name" clearable item-value="name"></v-combobox>
-                        <v-select v-else v-model.trim="tool.set" label="Equipo" :items="sets" item-text="name" clearable item-value="name"></v-select>
+                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.set" label="Equipo/Set" :items="sets" item-text="name" clearable item-value="name"></v-combobox>
+                        <v-select v-else v-model.trim="tool.set" label="Equipo/Set" :items="sets" item-text="name" clearable item-value="name"></v-select>
                     </div>
                     <div class="form-row">
-                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.des" label="Descripcion" :items="dess" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-combobox>
-                        <v-select v-else v-model.trim="tool.des" label="Descripcion" :items="dess" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-select>
+                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.des" label="Descripcion/Description" :items="dess" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-combobox>
+                        <v-select v-else v-model.trim="tool.des" label="Descripcion/Description" :items="dess" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-select>
                     </div>
                     <div class="form-row">
-                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.brand" label="Marca" :items="brands" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-combobox>
-                        <v-select v-else v-model.trim="tool.brand" label="Marca" :items="brands" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-select>
+                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.brand" label="Marca/Brand" :items="brands" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-combobox>
+                        <v-select v-else v-model.trim="tool.brand" label="Marca/Brand" :items="brands" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-select>
                     </div>
                     <div class="form-row">
-                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.calibration" label="Calibracion" :items="calibrations" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-combobox>
-                        <v-select v-else v-model.trim="tool.calibration" label="Calibracion" :items="calibrations" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-select>
+                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.calibration" label="Calibracion/Calibration Due" :items="calibrations" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-combobox>
+                        <v-select v-else v-model.trim="tool.calibration" label="Calibracion/Calibration Due" :items="calibrations" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-select>
                     </div>
                     <div class="form-row">
-                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.location" label="Localizacion" :items="locations" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-combobox>
-                        <v-select v-else v-model.trim="tool.location" label="Localizacion" :items="locations" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-select>
+                        <v-combobox v-if="verifyAccess([1])" v-model.trim="tool.location" label="Localizacion/Location" :items="locations" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-combobox>
+                        <v-select v-else v-model.trim="tool.location" label="Localizacion/Location" :items="locations" item-text="name" :rules="[rules.required]" clearable item-value="name"></v-select>
                     </div>
                 </div>
                 <div class="form-column">
                     <div class="form-row">
-                        <v-text-field v-model.number="tool.quantity" label="Cantidad" :rules="[rules.required, v => v > 0 || 'Cantidad invalida']"></v-text-field>
+                        <v-text-field v-model.number="tool.quantity" label="Cantidad/Quantity" :rules="[rules.required, v => v > 0 || 'Cantidad invalida']"></v-text-field>
                     </div>
                     <div class="form-row">
-                        <v-text-field v-model="tool.measurement" label="Unidad de medida" :rules="[rules.required]"></v-text-field>
+                        <v-text-field v-model="tool.measurement" label="Unidad de contaje/Unit" :rules="[rules.required]"></v-text-field>
                     </div>
                     <div class="form-row">
-                        <v-text-field v-model="tool.serial" label="N de Serie"></v-text-field>
+                        <v-text-field v-model="tool.serial" label="N de Serie/Serial #"></v-text-field>
                     </div>
                     <div class="form-row">
-                        <v-text-field v-model="tool.spect" label="Caracteristicas" :rules="[rules.required]"></v-text-field>
+                        <v-text-field v-model="tool.spect" label="Caracteristicas/Spect" :rules="[rules.required]"></v-text-field>
                     </div>
                 </div>
                 <div class="form-column">
                    <div class="form-row">
-                        <v-text-field v-model="tool.model" label="Modelo"></v-text-field>
+                        <v-text-field v-model="tool.model" label="Modelo/Model"></v-text-field>
                     </div>
                     <div class="form-row">
-                        <v-text-field v-model="tool.shelf_localization" label="Localizacion 2"></v-text-field>
+                        <v-text-field v-model="tool.shelf_localization" label="Localizacion 2/Location 2"></v-text-field>
                     </div>
                     <div class="form-row">
-                        <v-textarea v-model="tool.comments" label="Comentarios"></v-textarea>
+                        <v-textarea v-model="tool.comments" label="Comentarios/Comments"></v-textarea>
                     </div>
                 </div>
             </div>

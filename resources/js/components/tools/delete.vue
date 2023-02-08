@@ -41,12 +41,12 @@ export default {
         loading: false,
         headers: [
             {text: 'ITEM', value: 'item'},
-            {text: 'Equipo', value: 'set.name'},
-            {text: 'Descripcion', value: 'des.name'},
-            {text: 'Marca', value: 'brand.name'},
-            {text: 'Calibracion', value: 'calibration.name'},
-            {text: 'Localizacion', value: 'location.name'},
-            {text: 'Cantidad', value: 'quantity'},
+            {text: 'Equipo/Set', value: 'set.name'},
+            {text: 'Descripcion/Description', value: 'des.name'},
+            {text: 'Marca/Brand', value: 'brand.name'},
+            {text: 'Calibracion/Calibration Due', value: 'calibration.name'},
+            {text: 'Localizacion/Location', value: 'location.name'},
+            {text: 'Cantidad/Quantity', value: 'quantity'},
             {text: '', value: 'edit'}
         ]
     }),
